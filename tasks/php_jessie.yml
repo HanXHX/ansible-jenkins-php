@@ -1,0 +1,14 @@
+---
+
+- name: APT | Install PHP related packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - php5-cli
+    - ant
+    - libgettext-ant-tasks-java
+    - pdepend
+    - php-codesniffer
+    - phpcpd
+    - phploc
+    - phpmd
+    - phpunit

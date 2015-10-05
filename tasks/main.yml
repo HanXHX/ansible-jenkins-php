@@ -1,0 +1,10 @@
+---
+
+- name: INCLUDE | Install packages 
+  include: install.yml
+
+- name: INCLUDE | Get Jenkins CLI tool
+  include: cli.yml
+
+- name: INCLUDE | Install plugins
+  include: plugins.yml

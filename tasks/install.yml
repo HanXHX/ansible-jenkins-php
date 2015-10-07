@@ -15,10 +15,10 @@
   register: apt
 
 - name: SERVICE | Ensure Jenkins is started
-  service: name=jenkins state=restarted
-  when: apt.changed
+  service: name=jenkins state=started
+  register: service
 
 - name: WAIT_FOR | Wait for jenkins running
   wait_for: port={{ jenkins_port }} delay=60
-  when: apt.changed
+  when: apt.changed or service.changed
 

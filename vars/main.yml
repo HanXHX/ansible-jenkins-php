@@ -15,6 +15,7 @@ jenkins_plugins:
 jenkins_php_packages:
   - php5-cli
   - ant
+  - curl
   - libgettext-ant-tasks-java
   - pdepend
   - php-codesniffer

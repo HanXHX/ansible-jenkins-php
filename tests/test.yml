@@ -1,5 +1,7 @@
 ---
 
 - hosts: all
+  vars:
+    jenkins_port: 10080
   roles:
     - ../../

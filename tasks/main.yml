@@ -1,6 +1,6 @@
 ---
 
-- name: INCLUDE | Install packages 
+- name: INCLUDE | Install packages
   include: install.yml
 
 - name: INCLUDE | Get Jenkins CLI tool

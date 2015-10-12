@@ -15,6 +15,8 @@
 
 - name: COMMAND | Install Jenkins plugins
   command: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} install-plugin {{ item }}
-  with_items: jenkins_plugins
-  when: plugins_installed.changed and plugins_installed.stdout.find('{{ item }}') == -1
+  with_flattened:
+    - jenkins_plugins
+    - jenkins_extra_plugins
+  when: plugins_installed.stdout.find('{{ item }}') == -1
   notify: safe-restart jenkins

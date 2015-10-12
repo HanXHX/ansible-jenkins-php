@@ -2,3 +2,5 @@ jenkins_dir: '/opt/jenkins-tools'
 
 # Note: do not change this. Will be supported later.
 jenkins_port: 8080
+
+jenkins_extra_plugins: []

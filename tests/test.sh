@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Thanks to https://servercheck.in/blog/testing-ansible-roles-travis-ci-github
 
@@ -24,7 +24,7 @@ ansible-playbook -i $INVENTORY_FILE -c local --sudo -vv $PLAYBOOK \
 | grep -q 'changed=0.*failed=0' \
 && idpt=ok 
 
-if [ $idpt == "ok" ]
+if [ "$idpt" == "ok" ]
 then
 	echo 'Idempotence test: pass'
 	exit 0

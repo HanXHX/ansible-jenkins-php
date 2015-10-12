@@ -17,7 +17,7 @@ Role Variables
 - `jenkins_dir`: directory where you download tools (cli) and updates
 - `jenkins_port`: jenkins port (default is 8080)
 - `jenkins_extra_plugins`: add your needed plugins here
-- `jenkins_force_install_plugins`: force install plugins, could break idempotence (use 'yes' or 'no')
+- `jenkins_force_install_plugins`: (boolean) force install plugins, could break idempotence
 
 Dependencies
 ------------

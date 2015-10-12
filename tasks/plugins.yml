@@ -11,6 +11,6 @@
     - jenkins_plugins
     - jenkins_extra_plugins
   when: >
-    jenkins_force_install_plugins == 'yes' or
+    jenkins_force_install_plugins or
     item not in plugins_installed.stdout_lines
   notify: safe-restart jenkins

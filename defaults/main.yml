@@ -1,4 +1,4 @@
 jenkins_dir: '/opt/jenkins-tools'
 jenkins_port: 8080
 jenkins_extra_plugins: []
-jenkins_force_install_plugins: 'no'
+jenkins_force_install_plugins: false

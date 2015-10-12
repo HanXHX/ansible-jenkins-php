@@ -18,5 +18,5 @@
   with_flattened:
     - jenkins_plugins
     - jenkins_extra_plugins
-  when: plugins_installed.stdout.find('{{ item }}') == -1
+  when: item not in plugins_installed.stdout_lines
   notify: safe-restart jenkins

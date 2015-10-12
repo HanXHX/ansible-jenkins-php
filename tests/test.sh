@@ -18,7 +18,18 @@ echo "Wait 30 sec because Jenkins is restarting...."
 sleep 30
 
 # Check indempotence
+idpt=fail
 ansible-playbook -i $INVENTORY_FILE -c local --sudo -vv $PLAYBOOK \
+| tee replay.txt \
 | grep -q 'changed=0.*failed=0' \
-&& (echo 'Idempotence test: pass' && exit 0) \
-|| (echo 'Idempotence test: fail' && exit 1)
+&& idpt=ok 
+
+if [ $idpt == "ok" ]
+then
+	echo 'Idempotence test: pass'
+	exit 0
+else
+	cat replay.txt
+	echo 'Idempotence test: fail'
+	exit 1
+fi

@@ -29,9 +29,17 @@
   service: name=jenkins state=started
   register: service
 
-- name: WAIT_FOR | Wait for jenkins running
-  wait_for: port={{ jenkins_port }} delay=60
+- name: WAIT_FOR | Wait for Jenkins port
+  wait_for: port={{ jenkins_port }} delay=10
   when: apt.changed or service.changed
+
+- name: COMMAND | Wait Jenkins full up
+  command: curl http://localhost:{{ jenkins_port }}
+  register: result
+  until: result.stdout.find("Please wait while Jenkins is getting ready to work") == -1
+  retries: 10
+  delay: 3
+  changed_when: false
 
 - name: Generate SSH key for the jenkins user
   user: >

@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
     config.vm.define vm[0] do |m|
       m.vm.box = vm[1]
       m.vm.network "private_network", ip: vm[2]
-
+      m.vm.network "forwarded_port", guest: 10080, host: 10080
       m.vm.provision "ansible" do |ansible|
         ansible.playbook = "tests/test.yml"
         ansible.groups = { "test" => [ vm[0] ] }

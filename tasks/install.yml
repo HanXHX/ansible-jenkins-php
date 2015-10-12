@@ -33,3 +33,9 @@
   wait_for: port={{ jenkins_port }} delay=60
   when: apt.changed or service.changed
 
+- name: Generate SSH key for the jenkins user
+  user: >
+    name=jenkins
+    createhome=no
+    generate_ssh_key=yes
+    ssh_key_comment=jenkins@{{ ansible_fqdn }}

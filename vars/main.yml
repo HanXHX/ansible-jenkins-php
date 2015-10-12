@@ -1,5 +1,5 @@
+jenkins_home: '/var/lib/jenkins'
 jenkins_cli: '{{ jenkins_dir }}/jenkins-cli.jar'
-jenkins_update_json: '{{ jenkins_dir }}/updates_jenkins.json'
 jenkins_plugins:
   - build-pipeline-plugin
   - checkstyle

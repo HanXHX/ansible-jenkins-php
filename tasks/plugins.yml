@@ -1,7 +1,7 @@
 ---
 
 - name: SHELL | List plugins
-  shell: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} list-plugins | cut -f 1 -d ' '
+  shell: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} list-plugins | cut -f 1 -d ' ' | sort
   register: plugins_installed
   changed_when: false
 

@@ -1,5 +1,5 @@
 ---
 
 - name: safe-restart jenkins
-  command: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} safe-restart
+  service: name=jenkins state=restarted
 

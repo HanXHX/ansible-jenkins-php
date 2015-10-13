@@ -1,15 +1,12 @@
----
+env:
+  - PLATFORM=debian-jessie
+
+sudo: required
 
 language: python
-python: "2.7"
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y curl
-
-install:
-  - pip install ansible
+services:
+  - docker
 
 script:
-  - bash tests/test.sh
-  - curl http://localhost:10080
+  - docker build -f tests/$PLATFORM.Dockerfile -t test-$PLATFORM . && docker run --name $PLATFORM test-$PLATFORM

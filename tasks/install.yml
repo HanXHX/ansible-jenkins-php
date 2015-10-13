@@ -12,7 +12,6 @@
 
 - name: APT | Install Jenkins
   apt: pkg=jenkins state=present
-  register: apt
 
 - name: LINEINFILE | Set Jenkins configuration
   lineinfile: dest=/etc/default/jenkins regexp='^{{ item.1 }}=' line='{{ item.1 }}={{ item.0 }}'
@@ -30,8 +29,7 @@
   register: service
 
 - name: WAIT_FOR | Wait for Jenkins port
-  wait_for: port={{ jenkins_port }} delay=10
-  when: apt.changed or service.changed
+  wait_for: port={{ jenkins_port }} connect_timeout=30
 
 - name: COMMAND | Wait Jenkins full up
   command: curl http://localhost:{{ jenkins_port }}

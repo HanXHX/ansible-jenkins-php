@@ -1,8 +1,7 @@
 ---
 
-language: ruby
-rvm:
-  - 1.9.3
+language: python
+python: "2.7"
 
 before_install:
   - sudo apt-get update -qq
@@ -11,7 +10,6 @@ install:
   - sudo apt-get install -q virtualbox --fix-missing
   - sudo wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
   - sudo dpkg -i vagrant_1.7.4_x86_64.deb
-  - sudo apt-get install -f
 
 script:
   - vagrant up

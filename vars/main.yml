@@ -23,3 +23,4 @@ jenkins_php_packages:
   - phploc
   - phpmd
   - phpunit
+jenkins_default_args: '--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --httpListenAddress={{ jenkins_listen }}'

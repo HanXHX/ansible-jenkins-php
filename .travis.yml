@@ -5,11 +5,16 @@ python: "2.7"
 
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y curl
 
 install:
-  - pip install ansible
+  - sudo apt-get install -q virtualbox --fix-missing
+  - sudo wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+  - sudo dpkg -i vagrant_1.7.4_x86_64.deb
 
 script:
-  - bash tests/test.sh
-  - curl http://localhost:10080
+  - vagrant up
+  - >
+    vagrant provision
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)

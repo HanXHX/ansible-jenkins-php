@@ -19,6 +19,9 @@ Role Variables
 - `jenkins_port`: jenkins port (default is 8080)
 - `jenkins_extra_plugins`: add your needed plugins here
 - `jenkins_force_install_plugins`: (boolean) force install plugins, could break idempotence
+- `jenkins_auth_enabled`: (boolean) set to true to install plugins with login/pass. DO NOT SET TRUE BEFORE FIRST LAUNCH OR JENKINS WITH AUTHENTICATION DISABLED.
+- `jenkins_user`
+- `jenkins_password`
 
 Dependencies
 ------------

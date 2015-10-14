@@ -6,6 +6,7 @@ jenkins_plugins:
   - cloverphp
   - crap4j
   - dry
+  - git
   - htmlpublisher
   - jdepend
   - plot

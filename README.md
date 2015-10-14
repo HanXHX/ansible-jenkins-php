@@ -37,11 +37,6 @@ Example Playbook
          - { role: HanXHX.jenkins-php }
 
 
-Known issues (PR welcomed!)
----------------------------
-
-- Sometimes (first launch), you can have an error while getting cli tools (port 8080 opened but jenkins not fully running). Relaunch this role, it will fix it.
-
 License
 -------
 

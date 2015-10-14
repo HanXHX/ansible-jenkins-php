@@ -3,3 +3,7 @@ jenkins_listen: '0.0.0.0'
 jenkins_port: 8080
 jenkins_extra_plugins: []
 jenkins_force_install_plugins: false
+
+jenkins_ansible_user: 'ansible'
+jenkins_ansible_password: 'my_super_password'
+jenkins_auth_enabled: false

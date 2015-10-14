@@ -5,3 +5,17 @@
 
 - name: GET_URL | Get Jenkins CLI
   get_url: url=http://localhost:{{ jenkins_port }}/jnlpJars/jenkins-cli.jar dest={{ jenkins_cli }} mode=0440
+
+#
+# Crashes Jenkins... Find a clean way to create user
+#
+#- name : SHELL | Create Ansible User
+#  shell: >
+#    echo 'hpsr=new hudson.security.HudsonPrivateSecurityRealm(false); hpsr.createAccount("{{ jenkins_ansible_user }}", "{{ jenkins_ansible_password }}")' |
+#    java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }}/ groovy =
+#  when: user.changed
+
+- name: SET_FACT | Force authentication if needed
+  set_fact:
+    jenkins_auth_params: '--username {{ jenkins_ansible_user }} --password {{ jenkins_ansible_password }}'
+  when: jenkins_auth_enabled

@@ -1,12 +1,12 @@
 ---
 
 - name: SHELL | List plugins
-  shell: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} list-plugins | cut -f 1 -d ' ' | sort
+  shell: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} list-plugins {{ jenkins_auth_params  }} | cut -f 1 -d ' ' | sort
   register: plugins_installed
   changed_when: false
 
 - name: COMMAND | Install Jenkins plugins
-  command: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} install-plugin {{ item }}
+  command: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} install-plugin {{ item }} {{ jenkins_auth_params }}
   with_flattened:
     - jenkins_plugins
     - jenkins_extra_plugins

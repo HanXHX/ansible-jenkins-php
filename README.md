@@ -22,6 +22,7 @@ Role Variables
 - `jenkins_auth_enabled`: (boolean) set to true to install plugins with login/pass. DO NOT SET TRUE BEFORE FIRST LAUNCH OR JENKINS WITH AUTHENTICATION DISABLED.
 - `jenkins_ansible_user`
 - `jenkins_ansible_password`
+- `jenkins_jdk_package`: package used to install jdk (default is : 'openjdk-7-jdk'). If JDK is preconfigured, you can disable auto install by setting 'null'.
 
 Dependencies
 ------------

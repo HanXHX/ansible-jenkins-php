@@ -20,8 +20,8 @@ Role Variables
 - `jenkins_extra_plugins`: add your needed plugins here
 - `jenkins_force_install_plugins`: (boolean) force install plugins, could break idempotence
 - `jenkins_auth_enabled`: (boolean) set to true to install plugins with login/pass. DO NOT SET TRUE BEFORE FIRST LAUNCH OR JENKINS WITH AUTHENTICATION DISABLED.
-- `jenkins_user`
-- `jenkins_password`
+- `jenkins_ansible_user`
+- `jenkins_ansible_password`
 
 Dependencies
 ------------

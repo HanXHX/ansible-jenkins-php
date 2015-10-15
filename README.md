@@ -8,7 +8,7 @@ Install and configure [Jenkins](https://jenkins-ci.org/) for PHP. This role is i
 Requirements
 ------------
 
-- This role only supports Debian Jessie. 
+- This role only supports Debian Jessie. It could work on recent Ubuntu versions.
 - When you play this role for the first time, the port 8080 must be available.
 
 Role Variables

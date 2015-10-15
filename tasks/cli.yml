@@ -4,7 +4,10 @@
   file: path={{ jenkins_dir }} state=directory
 
 - name: GET_URL | Get Jenkins CLI
-  get_url: url=http://localhost:{{ jenkins_port }}/jnlpJars/jenkins-cli.jar dest={{ jenkins_cli }} mode=0440
+  get_url: >
+    url=http://localhost:{{ jenkins_port }}/jnlpJars/jenkins-cli.jar
+    dest={{ jenkins_cli }}
+    mode=0640
 
 #
 # Crashes Jenkins... Find a clean way to create user

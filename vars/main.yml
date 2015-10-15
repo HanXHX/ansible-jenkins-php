@@ -14,7 +14,7 @@ jenkins_plugins:
   - violations
   - warnings
   - xunit
-jenkins_php_packages:
+jenkins_packages:
   - php5-cli
   - ant
   - curl

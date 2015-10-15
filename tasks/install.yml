@@ -2,7 +2,7 @@
 
 - name: APT | Install PHP related packages
   apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
-  with_items: jenkins_php_packages
+  with_items: jenkins_packages
 
 - name: APT | Install JDK
   apt: pkg={{ jenkins_jdk_package }} state=present
@@ -18,7 +18,9 @@
   apt: pkg=jenkins state=present
 
 - name: LINEINFILE | Set Jenkins configuration
-  lineinfile: dest=/etc/default/jenkins regexp='^{{ item.1 }}=' line='{{ item.1 }}={{ item.0 }}'
+  lineinfile: >
+    dest=/etc/default/jenkins
+    regexp='^{{ item.1 }}=' line='{{ item.1 }}={{ item.0 }}'
   with_together:
     - [ '{{ jenkins_port }}', '"{{ jenkins_default_args }}"' ]
     - [ 'HTTP_PORT', 'JENKINS_ARGS' ]

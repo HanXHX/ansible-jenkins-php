@@ -22,5 +22,5 @@
   register: template
 
 - name: SHELL | Install PHP-jenkins template
-  shell: cat {{ jenkins_dir }}/config.xml | java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} create-job php-template
+  shell: cat {{ jenkins_dir }}/config.xml | java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} create-job php-template {{ jenkins_auth_params }}
   when: template.changed

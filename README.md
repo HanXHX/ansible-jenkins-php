@@ -1,7 +1,7 @@
 Jenkins + PHP Ansible role
 ==========================
 
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-HanXHX.jenkins--php-blue.svg)](https://galaxy.ansible.com/list#/roles/5418) [![Build Status](https://travis-ci.org/HanXHX/ansible-jenkins-php.svg)](https://travis-ci.org/HanXHX/ansible-jenkins-php)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-HanXHX.jenkins--php-blue.svg)](https://galaxy.ansible.com/list#/roles/5577) [![Build Status](https://travis-ci.org/HanXHX/ansible-jenkins-php.svg)](https://travis-ci.org/HanXHX/ansible-jenkins-php)
 
 Install and configure [Jenkins](https://jenkins-ci.org/) for PHP. This role is inspired by [jenkins-php.org](http://jenkins-php.org) project.
 

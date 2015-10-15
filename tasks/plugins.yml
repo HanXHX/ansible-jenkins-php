@@ -14,3 +14,13 @@
     jenkins_force_install_plugins or
     item not in plugins_installed.stdout_lines
   notify: safe-restart jenkins
+
+- name: GET_URL | Get PHP-jenkins template
+  get_url: >
+    url=https://raw.githubusercontent.com/sebastianbergmann/php-jenkins-template/master/config.xml
+    dest={{ jenkins_dir }}/config.xml
+  register: template
+
+- name: SHELL | Install PHP-jenkins template
+  shell: cat {{ jenkins_dir }}/config.xml | java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} create-job php-template
+  when: template.changed

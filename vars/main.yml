@@ -12,6 +12,7 @@ jenkins_plugins:
   - plot
   - pmd
   - violations
+  - warnings
   - xunit
 jenkins_php_packages:
   - php5-cli

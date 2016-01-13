@@ -15,7 +15,7 @@ jenkins_plugins:
   - warnings
   - xunit
 jenkins_packages:
-  - php5-cli
+  - "{{ jenkins_php_cli_package }}"
   - ant
   - curl
   - libgettext-ant-tasks-java

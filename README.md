@@ -22,6 +22,7 @@ Role Variables
 - `jenkins_ansible_user`
 - `jenkins_ansible_password`
 - `jenkins_jdk_package`: package used to install jdk (default is : 'openjdk-7-jdk'). If JDK is preconfigured, you can disable auto install by setting 'null'.
+- `jenkins_php_cli_package`: php debian package name (should be compatible with php7+dotdeb)
 
 Dependencies
 ------------

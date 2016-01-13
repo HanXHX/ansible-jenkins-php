@@ -9,6 +9,11 @@
     dest={{ jenkins_cli }}
     mode=0640
 
+- name: GET_URL | Check auth needed
+  command: curl -v http://localhost:{{ jenkins_port }}
+  register: curl_index
+  changed_when: false
+
 #
 # Crashes Jenkins... Find a clean way to create user
 #
@@ -21,4 +26,6 @@
 - name: SET_FACT | Force authentication if needed
   set_fact:
     jenkins_auth_params: '--username {{ jenkins_ansible_user }} --password {{ jenkins_ansible_password }}'
-  when: jenkins_auth_enabled
+  when: >
+    curl_index.stdout.find('Authentication required') != -1 or
+    curl_index.stdout.find('log in')

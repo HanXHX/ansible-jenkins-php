@@ -5,5 +5,4 @@ jenkins_extra_plugins: []
 jenkins_force_install_plugins: false
 jenkins_ansible_user: 'ansible'
 jenkins_ansible_password: 'my_super_password'
-jenkins_auth_enabled: false
 jenkins_jdk_package: 'openjdk-7-jdk'

@@ -3,7 +3,6 @@
 - hosts: all
   vars:
     jenkins_port: 10080
-    jenkins_auth_enabled: false
     jenkins_extra_plugins: ['ansible']
   roles:
     - ../../

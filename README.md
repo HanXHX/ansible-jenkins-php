@@ -45,4 +45,4 @@ GPLv2
 Author Information
 ------------------
 
-- Twitter: https://twitter.com/hanxhx
+- Twitter: https://twitter.com/hanxhx_

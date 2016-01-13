@@ -28,4 +28,4 @@
     jenkins_auth_params: '--username {{ jenkins_ansible_user }} --password {{ jenkins_ansible_password }}'
   when: >
     curl_index.stdout.find('Authentication required') != -1 or
-    curl_index.stdout.find('log in')
+    curl_index.stdout.find('log in') != -1

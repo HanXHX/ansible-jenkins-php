@@ -8,8 +8,8 @@
 - name: COMMAND | Install Jenkins plugins
   command: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} install-plugin {{ item }} {{ jenkins_auth_params }}
   with_flattened:
-    - jenkins_plugins
-    - jenkins_extra_plugins
+    - "{{ jenkins_plugins }}"
+    - "{{ jenkins_extra_plugins }}"
   when: >
     jenkins_force_install_plugins or
     item not in plugins_installed.stdout_lines

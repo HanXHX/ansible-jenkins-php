@@ -1,8 +1,13 @@
 ---
 
+- name: APT | Install packages
+  apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
+  with_items: "{{ jenkins_packages }}"
+
 - name: APT | Install PHP related packages
   apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
-  with_items: jenkins_packages
+  with_items: "{{ jenkins_php_packages }}"
+  when: jenkins_use_php_packages
 
 - name: APT | Install JDK
   apt: pkg={{ jenkins_jdk_package }} state=present

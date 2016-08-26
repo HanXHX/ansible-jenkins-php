@@ -6,4 +6,4 @@ jenkins_force_install_plugins: false
 jenkins_ansible_user: 'ansible'
 jenkins_ansible_password: 'my_super_password'
 jenkins_jdk_package: 'openjdk-7-jdk'
-jenkins_php_cli_package: 'php5-cli'
+jenkins_use_php_packages: false

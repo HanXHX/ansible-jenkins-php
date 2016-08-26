@@ -15,10 +15,10 @@ jenkins_plugins:
   - warnings
   - xunit
 jenkins_packages:
-  - "{{ jenkins_php_cli_package }}"
   - ant
   - curl
   - libgettext-ant-tasks-java
+jenkins_php_packages:
   - pdepend
   - php-codesniffer
   - phpcpd

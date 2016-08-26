@@ -4,13 +4,16 @@ galaxy_info:
   description: Jenkins-PHP for Debian
   company:
   license: GPLv2
-  min_ansible_version: 1.2
+  min_ansible_version: 2.0
   platforms:
   - name: Debian
     versions:
     - jessie
-  categories:
+  galaxy_tags:
   - web
   - development
+  - CI
+  - jenkins
+  - php
 dependencies: []
 

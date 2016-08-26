@@ -7,3 +7,4 @@ jenkins_ansible_user: 'ansible'
 jenkins_ansible_password: 'my_super_password'
 jenkins_jdk_package: 'openjdk-7-jdk'
 jenkins_use_php_packages: false
+jenkins_version: null

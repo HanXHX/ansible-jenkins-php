@@ -14,13 +14,21 @@
   when: jenkins_jdk_package is defined
 
 - name: APT_KEY | Install Jenkins key
-  apt_key: url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key state=present
+  apt_key: url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key state=present
+
+- name: APT_REPOSITORY | Delete unstable Jenkins repository
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' state=absent
 
 - name: APT_REPOSITORY | Add Jenkins repository
-  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' state=present
+  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian-stable binary/' state=present
 
-- name: APT | Install Jenkins
+- name: APT | Install Jenkins (from APT)
   apt: pkg=jenkins state=present
+  when: jenkins_version is not defined
+
+- name: APT | Install Jenkins version (from HTTP)
+  apt: deb="http://pkg.jenkins-ci.org/debian-stable/binary/jenkins_{{ jenkins_version }}_all.deb"
+  when: jenkins_version is defined
 
 - name: LINEINFILE | Set Jenkins configuration
   lineinfile: >

@@ -1,5 +1,4 @@
 jenkins_home: '/var/lib/jenkins'
-jenkins_cli: '{{ jenkins_dir }}/jenkins-cli.jar'
 jenkins_plugins:
   - build-pipeline-plugin
   - checkstyle
@@ -18,6 +17,8 @@ jenkins_packages:
   - ant
   - curl
   - libgettext-ant-tasks-java
+  - python-jenkins
+  - python-lxml
 jenkins_php_packages:
   - pdepend
   - php-codesniffer
@@ -25,5 +26,5 @@ jenkins_php_packages:
   - phploc
   - phpmd
   - phpunit
-jenkins_default_args: '--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT --httpListenAddress={{ jenkins_listen }}'
-jenkins_auth_params: ''
+jenkins_default_args: '--webroot=/var/cache/$NAME/war --httpPort=$HTTP_PORT'
+jenkins_admin_password_file: "{{ jenkins_home }}/secrets/initialAdminPassword"

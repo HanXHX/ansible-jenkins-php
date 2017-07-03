@@ -3,8 +3,11 @@
 - name: INCLUDE | Install packages
   include: install.yml
 
-- name: INCLUDE | Get Jenkins CLI tool
-  include: cli.yml
+- name: INCLUDE | SETUP
+  include: setup.yml
 
 - name: INCLUDE | Install plugins
+  include: plugins.yml
+
+- name: INCLUDE | Install job
   include: plugins.yml

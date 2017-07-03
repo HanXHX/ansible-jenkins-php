@@ -4,63 +4,16 @@
   apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items: "{{ jenkins_packages }}"
 
-- name: APT | Install PHP related packages
-  apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
-  with_items: "{{ jenkins_php_packages }}"
-  when: jenkins_use_php_packages
-
-- name: APT | Install JDK
-  apt: pkg={{ jenkins_jdk_package }} state=present
-  when: jenkins_jdk_package is defined
-
 - name: APT_KEY | Install Jenkins key
   apt_key: url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key state=present
-
-- name: APT_REPOSITORY | Delete unstable Jenkins repository
-  apt_repository: repo='deb http://pkg.jenkins-ci.org/debian binary/' state=absent
 
 - name: APT_REPOSITORY | Add Jenkins repository
   apt_repository: repo='deb http://pkg.jenkins-ci.org/debian-stable binary/' state=present
 
 - name: APT | Install Jenkins (from APT)
   apt: pkg=jenkins state=present
-  when: jenkins_version is not defined
+  when: jenkins_version is none
 
 - name: APT | Install Jenkins version (from HTTP)
   apt: deb="http://pkg.jenkins-ci.org/debian-stable/binary/jenkins_{{ jenkins_version }}_all.deb"
-  when: jenkins_version is defined
-
-- name: LINEINFILE | Set Jenkins configuration
-  lineinfile: >
-    dest=/etc/default/jenkins
-    regexp='^{{ item.1 }}=' line='{{ item.1 }}={{ item.0 }}'
-  with_together:
-    - [ '{{ jenkins_port }}', '"{{ jenkins_default_args }}"' ]
-    - [ 'HTTP_PORT', 'JENKINS_ARGS' ]
-  register: config
-
-- name: SERVICE | Stop Jenkins when config changed
-  service: name=jenkins state=stopped
-  when: config.changed
-
-- name: SERVICE | Ensure Jenkins is started
-  service: name=jenkins state=started
-  register: service
-
-- name: WAIT_FOR | Wait for Jenkins port
-  wait_for: port={{ jenkins_port }} connect_timeout=30
-
-- name: COMMAND | Wait Jenkins full up
-  command: curl http://localhost:{{ jenkins_port }}
-  register: result
-  until: result.stdout.find("Please wait while Jenkins is getting ready to work") == -1
-  retries: 10
-  delay: 3
-  changed_when: false
-
-- name: Generate SSH key for the jenkins user
-  user: >
-    name=jenkins
-    createhome=no
-    generate_ssh_key=yes
-    ssh_key_comment=jenkins@{{ ansible_fqdn }}
+  when: jenkins_version is not none

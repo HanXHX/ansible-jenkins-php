@@ -2,11 +2,7 @@
 
 - hosts: all
   vars:
-    jenkins_port: 10080
+    jenkins_http_port: 10080
     jenkins_extra_plugins: ['ansible']
-    jenkins_version: '1.651.3'
-  pre_tasks:
-    - name: APT | Install SSH client (fuck travis)
-      apt: pkg=openssh-client
   roles:
     - ../../

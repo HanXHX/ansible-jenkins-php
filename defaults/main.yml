@@ -1,10 +1,9 @@
-jenkins_dir: '/opt/jenkins-tools'
 jenkins_listen: '0.0.0.0'
-jenkins_port: 8080
+jenkins_http_port: 8080
 jenkins_extra_plugins: []
-jenkins_force_install_plugins: false
-jenkins_ansible_user: 'ansible'
-jenkins_ansible_password: 'my_super_password'
-jenkins_jdk_package: 'openjdk-7-jdk'
-jenkins_use_php_packages: false
 jenkins_version: null
+jenkins_admin_username: 'admin'
+jenkins_admin_password: null
+# You should not edit this...
+jenkins_user: "jenkins"
+jenkins_group: "{{ jenkins_user }}"

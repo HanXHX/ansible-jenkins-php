@@ -8,17 +8,15 @@ Install and configure [Jenkins](https://jenkins-ci.org/) for PHP. This role is i
 Requirements
 ------------
 
-- This role only supports Debian Jessie. It could work on recent Ubuntu versions.
-- When you play this role for the first time, the port 8080 must be available.
+- This role only supports Debian Jessie/Stretch. It could work on recent Ubuntu versions.
+- When you play this role for the first time. You must *NOT* edit `jenkins_admin_username` and `jenkins_admin_password`. It uses auto-genetated password to install plugins and jobs.
 
 Role Variables
 --------------
 
-- `jenkins_dir`: directory where you download tools (cli) and updates
 - `jenkins_listen`: jenkins listen (default is all ip)
-- `jenkins_port`: jenkins port (default is 8080)
+- `jenkins_http_port`: jenkins port (default is 8080)
 - `jenkins_extra_plugins`: add your needed plugins here
-- `jenkins_force_install_plugins`: (boolean) force install plugins, could break idempotence
 - `jenkins_ansible_user`
 - `jenkins_ansible_password`
 - `jenkins_jdk_package`: package used to install jdk (default is : 'openjdk-7-jdk'). If JDK is preconfigured, you can disable auto install by setting 'null'.

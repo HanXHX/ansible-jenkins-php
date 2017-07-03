@@ -1,0 +1,56 @@
+---
+
+- name: LINEINFILE | Set Jenkins configuration
+  lineinfile:
+    dest: /etc/default/jenkins
+    regexp: '^{{ item.1 }}='
+    line: '{{ item.1 }}={{ item.0 }}'
+  with_together:
+    - [ '{{ jenkins_http_port }}', '"{{ jenkins_default_args }}"' ]
+    - [ 'HTTP_PORT', 'JENKINS_ARGS' ]
+  register: config
+
+- name: SERVICE | Stop Jenkins when config changed
+  service: name=jenkins state=stopped
+  when: config.changed
+
+- name: SERVICE | Ensure Jenkins is started
+  service: name=jenkins state=started
+
+- name: USER | Generate SSH key for the jenkins user
+  user:
+    name: "{{ jenkins_user }}"
+    createhome: no
+    generate_ssh_key: yes
+    ssh_key_comment: 'jenkins@{{ ansible_fqdn }}'
+
+- block:
+
+  - name: WAIT_FOR | Initial password is created
+    wait_for:
+      path: "{{ jenkins_admin_password_file }}"
+
+  - name: SLURP | Get Jenkins admin password from file.
+    slurp:
+      src: "{{ jenkins_admin_password_file }}"
+    register: adminpasswordfile
+
+  - name: SET_FACT | Admin password from file
+    set_fact:
+      jenkins_admin_password: "{{ adminpasswordfile.content | b64decode | trim }}"
+
+  when: jenkins_admin_password is none
+  no_log: True
+
+- name: URI | Wait API
+  uri:
+    url: "http://localhost:{{ jenkins_http_port }}/api/json"
+    force_basic_auth: yes
+    user: "{{ jenkins_admin_username }}"
+    password: "{{ jenkins_admin_password }}"
+    status_code: 200,503
+  register: api
+  until: api.status == 200
+  retries: 10
+  delay: 3
+  changed_when: false

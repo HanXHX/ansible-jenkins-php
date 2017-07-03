@@ -1,26 +1,16 @@
 ---
 
-- name: SHELL | List plugins
-  shell: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} list-plugins {{ jenkins_auth_params  }} | cut -f 1 -d ' ' | sort
-  register: plugins_installed
-  changed_when: false
-
-- name: COMMAND | Install Jenkins plugins
-  command: java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} install-plugin {{ item }} {{ jenkins_auth_params }}
+- name: JENKINS_PLUGIN | Install...
+  jenkins_plugin:
+    name: "{{ item }}"
+    url: "http://localhost:{{ jenkins_http_port }}"
+    timeout: 120
+    params:
+      url_username: "{{ jenkins_admin_username }}"
+      url_password: "{{ jenkins_admin_password }}"
   with_flattened:
     - "{{ jenkins_plugins }}"
     - "{{ jenkins_extra_plugins }}"
-  when: >
-    jenkins_force_install_plugins or
-    item not in plugins_installed.stdout_lines
-  notify: safe-restart jenkins
+  notify: restart jenkins
 
-- name: GET_URL | Get PHP-jenkins template
-  get_url: >
-    url=https://raw.githubusercontent.com/sebastianbergmann/php-jenkins-template/master/config.xml
-    dest={{ jenkins_dir }}/config.xml
-  register: template
 
-- name: SHELL | Install PHP-jenkins template
-  shell: cat {{ jenkins_dir }}/config.xml | java -jar {{ jenkins_cli }} -s http://localhost:{{ jenkins_port }} create-job php-template {{ jenkins_auth_params }}
-  when: template.changed

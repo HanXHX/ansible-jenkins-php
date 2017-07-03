@@ -1,0 +1,20 @@
+---
+
+- name: GET_URL | Get PHP-Jenkins template
+  get_url:
+    url: https://raw.githubusercontent.com/sebastianbergmann/php-jenkins-template/master/config.xml
+    dest: '{{ jenkins_home }}/php_template.xml'
+  register: template
+
+- name: SLURP template
+  slurp:
+    src: '{{ jenkins_home }}/php_template.xml'
+  register: jenkins_php_template
+
+- name: JENKINS_JOB | Create template
+  jenkins_job:
+    name: "php-template"
+    config: "{{ jenkins_php_template.content  | b64decode | trim }}"
+    user: "{{ jenkins_admin_username }}"
+    password: "{{ jenkins_admin_password }}"
+    url: "http://localhost:{{ jenkins_http_port }}"
